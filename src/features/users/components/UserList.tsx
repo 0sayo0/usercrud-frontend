@@ -1,21 +1,19 @@
+import { useUserStore } from "../store/useUserStore";
+import UserCard from "./UserCard";
 import { useEffect } from "react";
 
-import { useUserStore } from "../store/useUserStore";
-
-import UserCard from "./UserCard";
-
 export default function UserList() {
-  const { users, isLoading, fetchUsers } = useUserStore();
+  const { users, isLoading, toFetchUsers } = useUserStore();
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    toFetchUsers();
+  }, [toFetchUsers]);
 
   if (isLoading) return <p>Cargando...</p>;
 
   return (
     <>
-      <ul className="grid md:grid-cols-2 justify-center items-center gap-40">
+      <ul className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-20">
         {users.map((user) => (
           <UserCard key={user._id} user={user} />
         ))}
