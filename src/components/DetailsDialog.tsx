@@ -55,6 +55,12 @@ export function DetailsDialog({
                         {user.email}
                       </span>
                     </p>
+                    <p className="font-bold text-sky-700">
+                      Role:{" "}
+                      <span className="font-normal text-gray-600">
+                        {user.role}
+                      </span>
+                    </p>
                   </div>
                   <div className="flex flex-col justify-evenly items-center w-full space-y-4">
                     <p className="font-bold text-sky-700">

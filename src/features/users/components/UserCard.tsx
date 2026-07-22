@@ -38,6 +38,10 @@ export default function UserCard({ user }: UserCardProps) {
               Email:{" "}
               <span className="font-normal text-gray-600">{user.email}</span>
             </p>
+            <p className="font-bold text-sky-700">
+              Role:{" "}
+              <span className="font-normal text-gray-600">{user.role}</span>
+            </p>
           </div>
         </div>
 
