@@ -10,6 +10,13 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import type { User } from "../features/users/types/user.types";
 import { useUserStore } from "../features/users/store/useUserStore";
+import { useEffect } from "react";
+import {
+  updateUserSchema,
+  type UpdateUserFormData,
+} from "../features/users/schemas/userSchema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type EditDialogFormProps = {
   user: User;
@@ -22,11 +29,39 @@ export function EditDialogForm({
   isOpenEdit,
   setIsOpenEdit,
 }: EditDialogFormProps) {
-  // const { toUpdateUser } = useUserStore();
+  const { toUpdateUser } = useUserStore();
 
-  // const onSubmitUpdateUser = (data) => {
-  //   console.log("Datos válidos enviados:", data);
-  // };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<UpdateUserFormData>({
+    resolver: zodResolver(updateUserSchema),
+  });
+
+  useEffect(() => {
+    if (isOpenEdit) {
+      reset({
+        name: user.name,
+        age: user.age,
+        email: user.email,
+        role: user.role,
+      });
+    }
+  }, [isOpenEdit, user, reset]);
+
+  const onSubmitUpdateUser = (data: UpdateUserFormData, _id: string) => {
+    console.log("Datos válidos enviados:", data);
+    toUpdateUser(data, _id);
+    reset();
+    setIsOpenEdit(false);
+  };
+
+  const cancelUpdateUser = () => {
+    reset();
+    setIsOpenEdit(false);
+  };
 
   return (
     <>
@@ -52,7 +87,12 @@ export function EditDialogForm({
                 exit={{ opacity: 0, scale: 0.95 }}
                 className="flex flex-col max-w-xl w-full space-y-4 bg-white p-12 rounded-lg"
               >
-                <form className="flex flex-row gap-14">
+                <form
+                  className="flex flex-col gap-14"
+                  onSubmit={handleSubmit((data) =>
+                    onSubmitUpdateUser(data, user._id),
+                  )}
+                >
                   <Fieldset className="grid">
                     <Legend className="text-xl font-bold text-pink-700 mb-6">
                       Edicion de {user.name}
@@ -63,7 +103,9 @@ export function EditDialogForm({
                           Nombre:
                         </Label>
                         <Input
-                          value={user.name}
+                          {...register("name")}
+                          type="text"
+                          // value={user.name}
                           placeholder="Nuevo nombre del usuario"
                           className="mt-1 block"
                           name="name"
@@ -72,7 +114,9 @@ export function EditDialogForm({
                       <Field className="space-y-4">
                         <Label className="font-bold text-sky-700">Edad:</Label>
                         <Input
-                          value={user.age}
+                          {...register("age", { valueAsNumber: true })}
+                          type="number"
+                          // value={user.age}
                           placeholder="Nueva edad del usuario"
                           className="mt-1 block"
                           name="age"
@@ -83,7 +127,9 @@ export function EditDialogForm({
                           E-mail:
                         </Label>
                         <Input
-                          value={user.email}
+                          {...register("email")}
+                          type="email"
+                          // value={user.email}
                           placeholder="Ej. stephany@example.com"
                           className="mt-1 block"
                           name="email"
@@ -92,7 +138,9 @@ export function EditDialogForm({
                       <Field className="space-y-4">
                         <Label className="font-bold text-sky-700">Role</Label>
                         <Input
-                          value={user.role}
+                          {...register("role")}
+                          type="text"
+                          // value={user.role}
                           placeholder="Nuevo role del usuario"
                           className="mt-1 block"
                           name="role"
@@ -100,22 +148,23 @@ export function EditDialogForm({
                       </Field>
                     </div>
                   </Fieldset>
-                </form>
 
-                <div className="flex gap-4">
-                  <button
-                    className="flex justify-center items-center bg-gray-500 hover:bg-gray-600 text-white rounded-md py-1 px-2 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
-                    onClick={() => setIsOpenEdit(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="flex justify-center items-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-md py-1 px-2 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
-                    onClick={() => setIsOpenEdit(false)}
-                  >
-                    Actualizar
-                  </button>
-                </div>
+                  <div className="flex gap-4">
+                    <button
+                      className="flex justify-center items-center bg-gray-500 hover:bg-gray-600 text-white rounded-md py-1 px-2 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
+                      onClick={() => cancelUpdateUser()}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="flex justify-center items-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-md py-1 px-2 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      Actualizar
+                    </button>
+                  </div>
+                </form>
               </DialogPanel>
             </div>
           </Dialog>

@@ -20,4 +20,7 @@ export const userSchema = z.object({
     .min(3, "El role debe tener minimo tres letras"),
 });
 
+export const updateUserSchema = userSchema.partial();
+
 export type CreateUserFormData = z.infer<typeof userSchema>;
+export type UpdateUserFormData = z.infer<typeof updateUserSchema>;

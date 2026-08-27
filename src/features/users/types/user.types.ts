@@ -10,4 +10,9 @@ export type User = {
 
 export type UserBody = Omit<User, "_id" | "createdAt" | "updatedAt">;
 
-export type UserBodyUpdate = Omit<User, "createdAt" | "updatedAt">;
+export type UpdateUserBody = {
+  name?: string;
+  age?: number;
+  email?: string;
+  role?: string;
+};

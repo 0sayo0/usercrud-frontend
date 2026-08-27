@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { userService } from "../services/userService";
-import type { User, UserBody, UserBodyUpdate } from "../types/user.types";
+import type { UpdateUserBody, User, UserBody } from "../types/user.types";
 
 type UserState = {
   users: User[];
@@ -8,7 +8,7 @@ type UserState = {
   isSubmitting: boolean;
   toFetchUsers: () => Promise<void>;
   toCreateUser: (data: UserBody) => Promise<void>;
-  toUpdateUser: (data: UserBodyUpdate) => Promise<void>;
+  toUpdateUser: (data: UpdateUserBody, _id: String) => Promise<void>;
 };
 
 export const useUserStore = create<UserState>((set, get) => ({
@@ -49,11 +49,11 @@ export const useUserStore = create<UserState>((set, get) => ({
     }
   },
 
-  toUpdateUser: async (data) => {
+  toUpdateUser: async (data, _id) => {
     set({ isSubmitting: true });
 
     try {
-      const response = await userService.updateUser(data);
+      const response = await userService.updateUser(data, _id);
       if (response.success) {
         set((state) => ({
           users: state.users.map((user) =>
