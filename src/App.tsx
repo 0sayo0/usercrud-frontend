@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import TopBtns from "./components/TopBtns";
 import UserList from "./features/users/components/UserList";
-import CreateDialogForm from "./components/CreateDialogForm";
+import CreateDialogForm from "./components/CreateDialog";
 
 function App() {
   const [isOpenCreate, setIsOpenCreate] = useState(false);

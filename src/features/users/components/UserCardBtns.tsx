@@ -16,7 +16,7 @@ export default function UserCardBtns({
       <Button
         onClick={() => setIsOpenEdit(true)}
         title="Editar usuario"
-        className="flex justify-center items-center bg-sky-500 hover:bg-sky-600 text-white rounded-md p-1 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
+        className="flex justify-center items-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-md p-1 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
       >
         Editar <Edit />
       </Button>

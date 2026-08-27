@@ -6,12 +6,14 @@ type DetailsDialogProps = {
   user: User;
   isOpenDetails: boolean;
   setIsOpenDetails: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenEdit: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function DetailsDialog({
   user,
   isOpenDetails,
   setIsOpenDetails,
+  setIsOpenEdit,
 }: DetailsDialogProps) {
   return (
     <>
@@ -79,11 +81,17 @@ export function DetailsDialog({
                 </div>
 
                 <div className="flex gap-4">
-                  <button onClick={() => setIsOpenDetails(false)}>
-                    Cancel
+                  <button
+                    className="flex justify-center items-center bg-gray-500 hover:bg-gray-600 text-white rounded-md py-1 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all px-2"
+                    onClick={() => setIsOpenDetails(false)}
+                  >
+                    Cerrar
                   </button>
-                  <button onClick={() => setIsOpenDetails(false)}>
-                    Deactivate
+                  <button
+                    className="flex justify-center items-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-md py-1 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all px-2"
+                    onClick={() => setIsOpenEdit(true)}
+                  >
+                    Editar
                   </button>
                 </div>
               </DialogPanel>

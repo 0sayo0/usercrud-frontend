@@ -9,6 +9,7 @@ import {
 } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { User } from "../features/users/types/user.types";
+import { useUserStore } from "../features/users/store/useUserStore";
 
 type EditDialogFormProps = {
   user: User;
@@ -21,6 +22,12 @@ export function EditDialogForm({
   isOpenEdit,
   setIsOpenEdit,
 }: EditDialogFormProps) {
+  // const { toUpdateUser } = useUserStore();
+
+  // const onSubmitUpdateUser = (data) => {
+  //   console.log("Datos válidos enviados:", data);
+  // };
+
   return (
     <>
       <AnimatePresence>
@@ -43,7 +50,7 @@ export function EditDialogForm({
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="flex flex-col max-w-lg space-y-4 bg-white p-12 rounded-lg"
+                className="flex flex-col max-w-xl w-full space-y-4 bg-white p-12 rounded-lg"
               >
                 <form className="flex flex-row gap-14">
                   <Fieldset className="grid">
@@ -96,9 +103,17 @@ export function EditDialogForm({
                 </form>
 
                 <div className="flex gap-4">
-                  <button onClick={() => setIsOpenEdit(false)}>Cancel</button>
-                  <button onClick={() => setIsOpenEdit(false)}>
-                    Desactivate
+                  <button
+                    className="flex justify-center items-center bg-gray-500 hover:bg-gray-600 text-white rounded-md py-1 px-2 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
+                    onClick={() => setIsOpenEdit(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="flex justify-center items-center bg-emerald-500 hover:bg-emerald-600 text-white rounded-md py-1 px-2 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
+                    onClick={() => setIsOpenEdit(false)}
+                  >
+                    Actualizar
                   </button>
                 </div>
               </DialogPanel>

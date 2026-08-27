@@ -54,6 +54,7 @@ export default function UserCard({ user }: UserCardProps) {
         user={user}
         isOpenDetails={isOpenDetails}
         setIsOpenDetails={setIsOpenDetails}
+        setIsOpenEdit={setIsOpenEdit}
       />
       <EditDialogForm
         user={user}

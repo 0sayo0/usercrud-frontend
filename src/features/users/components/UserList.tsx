@@ -9,6 +9,8 @@ export default function UserList() {
     toFetchUsers();
   }, [toFetchUsers]);
 
+  console.log(users);
+
   if (isLoading) return <p>Cargando...</p>;
 
   return (

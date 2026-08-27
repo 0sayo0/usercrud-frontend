@@ -1,5 +1,4 @@
 import { Input, Field, Label } from "@headlessui/react";
-
 import { Search } from "lucide-react";
 
 export default function Navbar() {
