@@ -107,7 +107,7 @@ export function EditDialogForm({
                           type="text"
                           // value={user.name}
                           placeholder="Nuevo nombre del usuario"
-                          className="mt-1 block"
+                          className="mt-1 block w-full"
                           name="name"
                         />
                       </Field>
@@ -118,7 +118,7 @@ export function EditDialogForm({
                           type="number"
                           // value={user.age}
                           placeholder="Nueva edad del usuario"
-                          className="mt-1 block"
+                          className="mt-1 block w-full"
                           name="age"
                         />
                       </Field>
@@ -131,7 +131,7 @@ export function EditDialogForm({
                           type="email"
                           // value={user.email}
                           placeholder="Ej. stephany@example.com"
-                          className="mt-1 block"
+                          className="mt-1 block w-full"
                           name="email"
                         />
                       </Field>
@@ -142,7 +142,7 @@ export function EditDialogForm({
                           type="text"
                           // value={user.role}
                           placeholder="Nuevo role del usuario"
-                          className="mt-1 block"
+                          className="mt-1 block w-full"
                           name="role"
                         />
                       </Field>

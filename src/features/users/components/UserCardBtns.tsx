@@ -1,6 +1,7 @@
 import { Button } from "@headlessui/react";
 import { Delete, Edit } from "lucide-react";
 import type { User } from "../types/user.types";
+import { useUserStore } from "../store/useUserStore";
 
 type UserCardBtnsProps = {
   user: User;
@@ -8,9 +9,11 @@ type UserCardBtnsProps = {
 };
 
 export default function UserCardBtns({
-  // user,
+  user,
   setIsOpenEdit,
 }: UserCardBtnsProps) {
+  const { toDeleteUser } = useUserStore();
+
   return (
     <>
       <Button
@@ -22,6 +25,7 @@ export default function UserCardBtns({
       </Button>
 
       <Button
+        onClick={() => toDeleteUser(user)}
         title="Eliminar usuario?"
         className="flex justify-center items-center bg-rose-500 hover:bg-rose-600 text-white rounded-md p-1 cursor-pointer gap-2 hover:-translate-y-0.5 transition-all"
       >

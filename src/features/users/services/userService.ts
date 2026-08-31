@@ -6,6 +6,7 @@ export const userService = {
     const response = await api.get<{ success: true; data: User[] }>("/");
     return response.data;
   },
+
   createUser: async (
     data: UserBody,
   ): Promise<{ success: true; data: User }> => {
@@ -13,14 +14,23 @@ export const userService = {
     console.log(response.data);
     return response.data;
   },
+
   updateUser: async (
     data: UpdateUserBody,
-    _id: String,
+    _id: string,
   ): Promise<{ success: true; data: User }> => {
     const response = await api.put<{ success: true; data: User }>(
       `/${_id}`,
       data,
     );
+    return response.data;
+  },
+
+  deleteUser: async (data: User) => {
+    const response = await api.delete<{
+      success: true;
+      message: string;
+    }>(`/${data._id}`);
     return response.data;
   },
 };

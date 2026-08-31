@@ -8,7 +8,8 @@ type UserState = {
   isSubmitting: boolean;
   toFetchUsers: () => Promise<void>;
   toCreateUser: (data: UserBody) => Promise<void>;
-  toUpdateUser: (data: UpdateUserBody, _id: String) => Promise<void>;
+  toUpdateUser: (data: UpdateUserBody, _id: string) => Promise<void>;
+  toDeleteUser: (data: User) => Promise<void>;
 };
 
 export const useUserStore = create<UserState>((set, get) => ({
@@ -65,6 +66,19 @@ export const useUserStore = create<UserState>((set, get) => ({
       console.error("Error al actualizar usuario en el store: ", error);
     } finally {
       set({ isSubmitting: false });
+    }
+  },
+
+  toDeleteUser: async (data) => {
+    try {
+      const response = await userService.deleteUser(data);
+      if (response.success) {
+        set((state) => ({
+          users: state.users.filter((user) => user._id !== data._id),
+        }));
+      }
+    } catch (error) {
+      console.error("Error al deliminar el usuario", error);
     }
   },
 }));
