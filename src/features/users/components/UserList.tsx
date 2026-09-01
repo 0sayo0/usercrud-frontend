@@ -23,7 +23,7 @@ export default function UserList() {
     },
   };
 
-  console.log(users);
+  // console.log(users);
 
   if (isLoading)
     return (

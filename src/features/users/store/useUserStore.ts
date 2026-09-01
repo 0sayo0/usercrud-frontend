@@ -12,7 +12,7 @@ type UserState = {
   toDeleteUser: (data: User) => Promise<void>;
 };
 
-export const useUserStore = create<UserState>((set, get) => ({
+export const useUserStore = create<UserState>((set) => ({
   users: [],
   isLoading: false,
   isSubmitting: false,
@@ -25,7 +25,7 @@ export const useUserStore = create<UserState>((set, get) => ({
       if (response.success) {
         set({ users: response.data });
       }
-      console.log("usuarios actualizados:", get().users);
+      // console.log("usuarios actualizados:", get().users);
     } catch (error) {
       console.error("Error al traer usuarios al store: ", error);
     } finally {
