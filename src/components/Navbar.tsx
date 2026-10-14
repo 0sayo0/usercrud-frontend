@@ -10,7 +10,6 @@ export default function Navbar() {
 
   // React States
   const [search, setSearch] = useState("");
-  const [showFoundUsers, setShowFounUsers] = useState([]);
 
   useEffect(() => {
     toFetchUsers();
